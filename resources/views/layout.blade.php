@@ -23,10 +23,26 @@
                         <a href="#" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
                     </div>
                 </div>
+                @auth
+                    
+            <div class="flex items-center space-x-4">
+                <img src="{{ asset('storage/'. Auth::user()->img) }}" alt="{{ Auth::user()->first_name }}" class="w-10 h-10 rounded-full">
+                <span class="text-white font-medium">{{ Auth::user()->first_name }}</span>
+                <form method="POST" action="/logout">
+                    @csrf
+                    <button type="submit" class="bg-white text-purple-600 px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition-colors">Logout</button>
+                </form>
+            </div>
+            
+                 
+             @else
+                 
+             
                 <div class="flex items-center space-x-4">
                     <a href="/register" class="bg-white text-purple-600 px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition-colors">Sign Up</a>
                     <a href="/login" class="text-white hover:bg-white/10 px-4 py-2 rounded-md font-medium transition-colors">Login</a>
                 </div>
+                @endauth
             </div>
         </div>
     </nav>

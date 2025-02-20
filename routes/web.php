@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,13 @@ Route::get('/register', [UserController::class, 'create']);
 
 // create new user 
 Route::post('/users', [UserController::class, 'store']);
+Route::post('/logout', [UserController::class, 'logout']);
 
 
+// show login form 
+Route::get('/login', [UserController::class, 'login']);
+
+
+
+Route::post('/User/authenticate', [UserController::class, 'authenticate']);
 // require __DIR__ . '/auth.php';
