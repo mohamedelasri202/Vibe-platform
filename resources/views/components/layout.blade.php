@@ -8,6 +8,7 @@
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <nav class="bg-gradient-to-r from-purple-600 to-indigo-600 shadow-lg">
@@ -23,14 +24,28 @@
                         <a href="#" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
                     </div>
                 </div>
+                @auth
+                    
+            <div class="flex items-center space-x-4">
+                <span class="text-white font-medium">{{ Auth::user()->first_name }}</span>
+                <form method="POST" action="/logout">
+                    @csrf
+                    <button type="submit" class="bg-white text-purple-600 px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition-colors">Logout</button>
+                </form>
+            </div>
+            
+                 
+             @else
+                 
+             
                 <div class="flex items-center space-x-4">
                     <a href="/register" class="bg-white text-purple-600 px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition-colors">Sign Up</a>
                     <a href="/login" class="text-white hover:bg-white/10 px-4 py-2 rounded-md font-medium transition-colors">Login</a>
                 </div>
+                @endauth
             </div>
         </div>
     </nav>
- 
 
     {{-- yeeled the content this is where the view suppose to go --}}
     <main>
@@ -53,6 +68,9 @@
         </div>
     </footer>
     </body>
+    </html>
+
+     </body>
     </html>
 
     

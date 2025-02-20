@@ -26,11 +26,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 // show regester form 
 Route::get('/register', [UserController::class, 'create']);
@@ -46,4 +46,7 @@ Route::get('/login', [UserController::class, 'login']);
 
 
 Route::post('/User/authenticate', [UserController::class, 'authenticate']);
+// show the profil
+
+Route::get('/profilo', [UserController::class, 'profilo']);
 // require __DIR__ . '/auth.php';

@@ -67,8 +67,21 @@ class UserController extends Controller
         ]);
         if (auth()->attempt($formFields)) {
             $request->session()->regenerate();
-            return redirect('/')->with('message', 'you are loged in ');
+            return redirect('dashboard')->with('message', 'you are loged in ');
         }
         return back()->withErrors(['email' => 'invlid credentials'])->onlyInput('email');
+    }
+
+
+    // load the view for the dashborrd 
+    public function dashboard()
+    {
+        return view('dashboard');
+    }
+
+    // show the profile 
+    public function profilo()
+    {
+        return view('profilo');
     }
 }
