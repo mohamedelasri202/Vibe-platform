@@ -13,7 +13,7 @@ class UserController extends Controller
     // show the the registr form 
     public function create()
     {
-        return view('User.register');
+        return view('Users.register');
     }
     // store  create new user 
     public function store(Request $request)
@@ -54,12 +54,12 @@ class UserController extends Controller
         auth()->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/')->with('message', 'you have been logged out ');
+        return redirect('/login')->with('message', 'you have been logged out ');
     }
     // login 
     public function login()
     {
-        return view('User.login');
+        return view('Users.login');
     }
 
     public function authenticate(Request $request)
@@ -77,6 +77,15 @@ class UserController extends Controller
         return back()->withErrors(['email' => 'invlid credentials'])->onlyInput('email');
     }
 
+    public function friends()
+    {
+        $users = \App\Models\User::where('id', '!=', auth()->id())->get();
+        return view('friends', compact('users'));
+    }
+
+
+
+
 
     // load the view for the dashborrd 
     public function dashboard()
@@ -87,9 +96,14 @@ class UserController extends Controller
     // show the profile 
 
 
+
     public function profilo()
     {
         return view('profilo',  ['user' => Auth::user()]);
+    }
+    public function edite()
+    {
+        return view('edite');
     }
 
     public function update(Request $request, User $user)
@@ -97,9 +111,10 @@ class UserController extends Controller
         $formFields = $request->validate([
             'first_name' => ['required', 'string', 'min:3'],
             'last_name' => ['required', 'string', 'min:3'],
-            'img' => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif', 'max:2048'], // Ensure only valid image types
-            'email' => ['required', 'email', 'unique:users,email,' . $user->id], // Ensure email is valid and unique except for the current user
-            'password' => ['nullable', 'string', 'min:6'], // Minimum 6 characters and requires confirmation
+            'img' => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif', 'max:2048'],
+            'email' => ['required', 'email', 'unique:users,email,' . $user->id],
+            'password' => ['nullable', 'string', 'min:6'],
+            'bio' => ['nullable', 'string', 'max:65535'],
         ]);
 
         // Handle the image upload and store the image path
@@ -117,6 +132,6 @@ class UserController extends Controller
 
 
         // Redirect with a success message
-        return redirect('/')->with('message', 'User created and logged in');
+        return redirect('/profilo')->with('message', 'User created and logged in');
     }
 }

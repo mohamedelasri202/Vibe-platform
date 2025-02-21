@@ -16,7 +16,8 @@
                 <!-- Icons -->
                 <div class="space-y-8">
                     <div class="group relative">
-                        <i class="fas fa-user-plus text-xl text-gray-500 cursor-pointer hover:text-blue-500"></i>
+                        <a href="/friends"><i class="fas fa-user-plus text-xl text-gray-500 cursor-pointer hover:text-blue-500"></i></a>
+
                         <div class="absolute left-14 top-0 bg-white p-2 rounded shadow-md text-sm hidden group-hover:block">
                             Add Friends
                         </div>
@@ -107,5 +108,5 @@
             </div>
         </div>
     </body>
-    </html>
+
 </x-layout>

@@ -33,7 +33,7 @@ Route::get('/dashboard', function () {
 // });
 
 // show regester form 
-Route::get('/register', [UserController::class, 'create']);
+Route::get('/register', [UserController::class, 'create'])->middleware('guest');
 
 // create new user 
 Route::post('/users', [UserController::class, 'store']);
@@ -49,8 +49,13 @@ Route::post('/User/authenticate', [UserController::class, 'authenticate']);
 // show the profil
 
 //  edite submit to update the user detaills 
-
-
+// get the view for the edite form 
+Route::get('/edite', [UserController::class, 'edite']);
 Route::get('/profilo', [UserController::class, 'profilo'])->name('profilo.profilo');
-Route::Put('/profil/{user}', [UserController::class, 'update'])->name('profil.update');
+Route::Put('/profilo/{user}', [UserController::class, 'update'])->name('profilo.update');
+
+// loading users view  
+Route::get('/friends', [UserController::class, 'friends']);
+
+
 // require __DIR__ . '/auth.php';
