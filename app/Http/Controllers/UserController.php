@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Hashing\BcryptHasher;
 use Termwind\Components\Raw;
+use Illuminate\Hashing\BcryptHasher;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -31,8 +32,12 @@ class UserController extends Controller
             $formFields['img'] = $request->file('img')->store('images', 'public');
         }
 
-        // Hash the password
-        $formFields['password'] = bcrypt($formFields['password']);
+        // Hash the password if it is set
+        if (!empty($formFields['password'])) {
+            $formFields['password'] = bcrypt($formFields['password']);
+        } else {
+            unset($formFields['password']);
+        }
 
         // Create the new user
         $user = User::create($formFields);
@@ -80,8 +85,38 @@ class UserController extends Controller
     }
 
     // show the profile 
+
+
     public function profilo()
     {
-        return view('profilo');
+        return view('profilo',  ['user' => Auth::user()]);
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $formFields = $request->validate([
+            'first_name' => ['required', 'string', 'min:3'],
+            'last_name' => ['required', 'string', 'min:3'],
+            'img' => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif', 'max:2048'], // Ensure only valid image types
+            'email' => ['required', 'email', 'unique:users,email,' . $user->id], // Ensure email is valid and unique except for the current user
+            'password' => ['nullable', 'string', 'min:6'], // Minimum 6 characters and requires confirmation
+        ]);
+
+        // Handle the image upload and store the image path
+        if ($request->hasFile('img')) {
+            $formFields['img'] = $request->file('img')->store('images', 'public');
+        }
+
+        // Hash the password
+        $formFields['password'] = bcrypt($formFields['password']);
+
+        // Create the new user
+        $user->update($formFields);
+
+        // Log the user in
+
+
+        // Redirect with a success message
+        return redirect('/')->with('message', 'User created and logged in');
     }
 }

@@ -48,5 +48,9 @@ Route::get('/login', [UserController::class, 'login']);
 Route::post('/User/authenticate', [UserController::class, 'authenticate']);
 // show the profil
 
-Route::get('/profilo', [UserController::class, 'profilo']);
+//  edite submit to update the user detaills 
+
+
+Route::get('/profilo', [UserController::class, 'profilo'])->name('profilo.profilo');
+Route::Put('/profil/{user}', [UserController::class, 'update'])->name('profil.update');
 // require __DIR__ . '/auth.php';
