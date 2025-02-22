@@ -77,9 +77,24 @@ class UserController extends Controller
         return back()->withErrors(['email' => 'invlid credentials'])->onlyInput('email');
     }
 
-    public function friends()
+    public function friends(Request $request)
     {
-        $users = \App\Models\User::where('id', '!=', auth()->id())->get();
+        // Get the search query from the request (using the input name "search")
+        $search = $request->input('search');
+
+        // If there's a search term, filter users; otherwise, get all users except the current one
+        if ($search) {
+            $users = User::where('id', '!=', auth()->id())
+                ->where(function ($query) use ($search) {
+                    $query->where('first_name', 'like', "%{$search}%")
+                        ->orWhere('last_name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%");
+                })
+                ->get();
+        } else {
+            $users = User::where('id', '!=', auth()->id())->get();
+        }
+
         return view('friends', compact('users'));
     }
 

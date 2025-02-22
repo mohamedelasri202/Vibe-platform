@@ -2,11 +2,13 @@
 <body class="bg-gray-100 ">
     <div class="container mx-auto">
         <h2 class="text-2xl font-bold mb-6">People You May Know</h2>
-        <div class="relative">
-            <input type="text" 
-                   class="w-64 px-4 py-2 bg-neutral-100 rounded-lg focus:outline-none focus:ring-1 ring-blue-500"
-                   placeholder="Search...">
-        </div>
+    <form method="GET" action="/friends" class="flex mb-6">
+        <input type="text" name="search" placeholder="Search friends..." class="flex-grow p-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <button class="bg-blue-500 text-white px-6 py-2 rounded-r-md hover:bg-blue-600 transition" type="submit">
+            Search
+        </button>
+    </form>
+    </div>
         
         <!-- Grid of user cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
