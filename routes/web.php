@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\FriendController;
+
+
 use App\Models\User;
 
 /*
@@ -59,6 +62,14 @@ Route::Put('/edite/{user}', [UserController::class, 'update']);
 
 // loading users view  
 Route::get('/friends', [UserController::class, 'friends']);
+
+
+
+Route::middleware('auth')->group(function () {
+    Route::post('/friends/request/{receiverId}', [FriendController::class, 'sendRequest'])->name('friends.request');
+    Route::post('/friends/accept/{requestId}', [FriendController::class, 'acceptRequest'])->name('friends.accept');
+    Route::post('/friends/decline/{requestId}', [FriendController::class, 'declineRequest'])->name('friends.decline');
+});
 
 
 // require __DIR__ . '/auth.php';

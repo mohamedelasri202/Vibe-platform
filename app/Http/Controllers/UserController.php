@@ -79,9 +79,7 @@ class UserController extends Controller
 
     public function friends(Request $request)
     {
-
         $search = $request->input('search');
-
 
         if ($search) {
             $users = User::where('id', '!=', auth()->id())
@@ -95,8 +93,10 @@ class UserController extends Controller
             $users = User::where('id', '!=', auth()->id())->get();
         }
 
-        return view('friends', compact('users'));
+        // Pass the search query along with users data to the view
+        return view('friends', compact('users', 'search'));
     }
+
 
 
 
