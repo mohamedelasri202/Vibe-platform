@@ -51,8 +51,11 @@ Route::post('/User/authenticate', [UserController::class, 'authenticate']);
 //  edite submit to update the user detaills 
 // get the view for the edite form 
 Route::get('/edite', [UserController::class, 'edite']);
+
 Route::get('/profilo', [UserController::class, 'profilo'])->name('profilo.profilo');
-Route::Put('/profilo/{user}', [UserController::class, 'update'])->name('profilo.update');
+Route::Put('/edite/{user}', [UserController::class, 'update']);
+
+
 
 // loading users view  
 Route::get('/friends', [UserController::class, 'friends']);

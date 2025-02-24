@@ -79,10 +79,10 @@ class UserController extends Controller
 
     public function friends(Request $request)
     {
-        // Get the search query from the request (using the input name "search")
+
         $search = $request->input('search');
 
-        // If there's a search term, filter users; otherwise, get all users except the current one
+
         if ($search) {
             $users = User::where('id', '!=', auth()->id())
                 ->where(function ($query) use ($search) {
@@ -132,21 +132,17 @@ class UserController extends Controller
             'bio' => ['nullable', 'string', 'max:65535'],
         ]);
 
-        // Handle the image upload and store the image path
+
         if ($request->hasFile('img')) {
             $formFields['img'] = $request->file('img')->store('images', 'public');
         }
 
-        // Hash the password
         $formFields['password'] = bcrypt($formFields['password']);
 
-        // Create the new user
         $user->update($formFields);
 
-        // Log the user in
 
 
-        // Redirect with a success message
         return redirect('/profilo')->with('message', 'User created and logged in');
     }
 }
