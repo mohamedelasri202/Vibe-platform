@@ -24,7 +24,8 @@
                     </div>
     
                     <div class="group relative">
-                        <i class="fas fa-comments text-xl text-gray-500 cursor-pointer hover:text-blue-500"></i>
+                     <a href="{{route('frinds_list')}}"
+                     <i class="fas fa-comments text-xl text-gray-500 cursor-pointer hover:text-blue-500"></i></a>
                         <div class="absolute left-14 top-0 bg-white p-2 rounded shadow-md text-sm hidden group-hover:block">
                             Messages
                         </div>
@@ -32,7 +33,8 @@
                     </div>
     
                     <div class="group relative">
-                        <i class="fas fa-users text-xl text-gray-500 cursor-pointer hover:text-blue-500"></i>
+                <a href="{{ route('friend_requests') }}"><i class="fas fa-users text-xl text-gray-500 cursor-pointer hover:text-blue-500"></i></a>
+                        
                         <div class="absolute left-14 top-0 bg-white p-2 rounded shadow-md text-sm hidden group-hover:block">
                             Friends
                         </div>

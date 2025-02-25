@@ -6,8 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\FriendController;
-
-
+use App\Models\Friend;
 use App\Models\User;
 
 /*
@@ -70,6 +69,19 @@ Route::middleware('auth')->group(function () {
     Route::post('/friends/accept/{requestId}', [FriendController::class, 'acceptRequest'])->name('friends.accept');
     Route::post('/friends/decline/{requestId}', [FriendController::class, 'declineRequest'])->name('friends.decline');
 });
+
+// load the view for the friend request pages 
+Route::get('/friend_requests', [FriendController::class, 'friendRequests'])->name('friend_requests');
+Route::get('/friends_list', [FriendController::class, 'friendsList'])->name('frinds_list');
+Route::get('/profile/{userId}', [FriendController::class, 'profile'])->name('profile-view');
+
+
+Route::delete('/friend_requests/{id}/remove', [FriendController::class, 'declineRequest'])
+    ->name('decline-request');
+
+
+
+// Route::get('/profile/{userId}', [FriendController::class, 'profile'])->name('profile.view');
 
 
 // require __DIR__ . '/auth.php';
