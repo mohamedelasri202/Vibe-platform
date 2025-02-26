@@ -1,7 +1,7 @@
 <x-layout>
-    <body class="bg-gray-100">
+    <body class="bg-gray-50">
         <div class="flex h-screen">
-            <!-- Your Original Sidebar -->
+            <!-- Sidebar -->
             <div class="w-20 bg-white border-r flex flex-col items-center py-6 space-y-8">
                 <!-- Profile -->
                 <div class="group relative">
@@ -39,100 +39,72 @@
                     </div>
                 </div>
             </div>
-        <div class="container mx-auto px-4 py-8">
-            <!-- Profile Card -->
-            <div class="bg-white rounded-lg shadow-lg max-w-2xl mx-auto">
-                <!-- Cover Image -->
-                <div class="h-48 bg-gray-300 rounded-t-lg relative">
-                    <img src="/api/placeholder/800/200" alt="Cover Photo" class="w-full h-full object-cover rounded-t-lg">
-                </div>
-                
-                <!-- Profile Picture -->
-                <div class="relative px-6">
-                    <div class="absolute -top-20">
-                        <img src="{{ asset('storage/'. $user->img) }}" alt="{{ $user->first_name }}" class="w-40 h-40 rounded-full border-4 border-white object-cover">
-                    </div>
-                </div>
-                
-                <!-- Profile Info -->
-                <div class="px-6 pt-24 pb-6">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h1 class="text-3xl font-bold text-gray-900">{{ $user->first_name }}</h1>
+    
+            <!-- Main Content -->
+            <div class="flex-1 p-6 bg-gray-50 overflow-y-auto">
+                <div class="max-w-2xl mx-auto space-y-6">
+                    <!-- Profile Card -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+                        <div class="relative w-full h-48 bg-gray-300 rounded-lg overflow-hidden">
+                            <img src="/api/placeholder/800/200" alt="Cover Photo" class="w-full h-full object-cover">
                         </div>
-                    </div>
-                    
-                    <!-- User Details -->
-                    <div class="mt-6 space-y-4">
-                        <div class="flex items-center text-gray-600">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                    d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
-                            </svg>
-                            <span>{{ $user->email }}</span>
+    
+                        <!-- Profile Picture & Info -->
+                        <div class="relative text-center -mt-16">
+                            <img src="{{ asset('storage/'. $user->img) }}" alt="{{ $user->first_name }}" class="w-32 h-32 rounded-full border-4 border-white object-cover mx-auto">
+                            <h1 class="mt-3 text-2xl font-bold text-gray-900">{{ $user->first_name }} {{ $user->last_name }}</h1>
+                            <p class="text-gray-500">{{ $user->email }}</p>
                         </div>
-                        
+    
+                        <!-- Bio Section -->
                         <div class="border-t border-gray-200 pt-4 mt-4">
                             <h2 class="text-xl font-semibold mb-2">Bio</h2>
-                            <p class="text-gray-600">
-                               {{ $user->bio }}
-                            </p>
+                            <p class="text-gray-600">{{ $user->bio }}</p>
                         </div>
-                        
-                        <div class="border-t border-gray-200 pt-4">
-                            <h2 class="text-xl font-semibold mb-2">Details</h2>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <p class="text-gray-500">{{ $user->last_name }}</p>
-                                    <p class="font-medium">{{ $user->first_name }}</p>
+                    </div>
+    
+                    <!-- User Posts -->
+                    <div class="space-y-5">
+                        @if($user->posts->isEmpty())
+                            <p class="text-center text-gray-500">No posts yet.</p>
+                        @else
+                            @foreach ($user->posts as $post)
+                                <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-200 hover:border-gray-300 transition-colors">
+                                    <div class="flex items-start gap-3">
+                                        <img src="{{asset('storage/'.$post->user->img)}}" 
+                                             alt="User Name" 
+                                             class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
+                                        <div class="flex-1">
+                                            <div class="flex items-baseline gap-2 mb-1">
+                                               <a href="{{ route('profile-view', $post->user->id) }}" class="font-semibold text-gray-800">{{$post->user->first_name}}</a>
+                                                <span class="text-sm text-gray-500">· 2h ago</span>
+                                            </div>
+                                            <p class="text-gray-800 leading-relaxed mb-4">{{$post->content}}</p>
+                                            @if($post->img)
+                                            <img src="{{asset('storage/'.$post->img)}}" 
+                                                 alt="Post image" 
+                                                 class="w-full rounded-lg object-cover shadow-sm mb-4">
+                                            @endif
+                                            
+                                            <!-- Interaction Buttons -->
+                                            <div class="flex items-center gap-4 pt-3 border-t border-gray-100">
+                                                <button class="flex items-center gap-1.5 text-gray-500 hover:text-blue-500">
+                                                    <i class="far fa-comment text-lg"></i>
+                                                    <span class="text-sm">24 comments</span>
+                                                </button>
+                                                <button class="flex items-center gap-1.5 text-gray-500 hover:text-red-500">
+                                                    <i class="far fa-heart text-lg"></i>
+                                                    <span class="text-sm">148 likes</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
-        <div class="space-y-5">
-            @if($user->posts->isEmpty())
-    <p>No posts yet.</p>
-@else
-@foreach ($user->posts as $post)
-            <!-- Post Example -->
-            <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-200 hover:border-gray-300 transition-colors">
-                <div class="flex items-start gap-3">
-                    <img src="{{asset('storage/'.$post->user->img)}}" 
-                         alt="User Name" 
-                         class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
-                    <div class="flex-1">
-                        <div class="flex items-baseline gap-2 mb-1">
-                           <a href="{{ route('profile-view', $post->user->id) }}" <h4 class="font-semibold text-gray-800">{{$post->user->first_name}}</h4></a>
-                            <span class="text-sm text-gray-500">· 2h ago</span>
-                        </div>
-                        <p class="text-gray-800 leading-relaxed mb-4">
-                            {{$post->content}}
-                        </p>
-                        <img src="{{asset('storage/'.$post->img)}}" 
-                             alt="Post image" 
-                             class="w-full rounded-lg object-cover shadow-sm mb-4">
-                        
-                        <!-- Interaction Buttons -->
-                        <div class="flex items-center gap-4 pt-3 border-t border-gray-100">
-                            <button class="flex items-center gap-1.5 text-gray-500 hover:text-blue-500">
-                                <i class="far fa-comment text-lg"></i>
-                                <span class="text-sm">24 comments</span>
-                            </button>
-                            <button class="flex items-center gap-1.5 text-gray-500 hover:text-red-500">
-                                <i class="far fa-heart text-lg"></i>
-                                <span class="text-sm">148 likes</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-            @endif
-        </div>
-    </div>
-</div>
-</div>
-    </x-layout>
+    </body>
+</x-layout>

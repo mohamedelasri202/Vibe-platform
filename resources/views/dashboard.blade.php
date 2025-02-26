@@ -87,6 +87,7 @@
                     <h4> thers no posts to show</h4>
                         @else
                             @foreach ($posts as $post )
+
                         <!-- Post Example -->
                         <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-200 hover:border-gray-300 transition-colors">
                             <div class="flex items-start gap-3">
