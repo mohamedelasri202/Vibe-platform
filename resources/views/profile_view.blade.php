@@ -1,5 +1,44 @@
 <x-layout>
     <body class="bg-gray-100">
+        <div class="flex h-screen">
+            <!-- Your Original Sidebar -->
+            <div class="w-20 bg-white border-r flex flex-col items-center py-6 space-y-8">
+                <!-- Profile -->
+                <div class="group relative">
+                   <a href="/profilo"> <img src="{{ asset('storage/'. Auth::user()->img) }}" alt="{{ Auth::user()->first_name }}" class="w-10 h-10 rounded-full"></a>
+                    <div class="absolute left-14 top-0 bg-white p-2 rounded shadow-md text-sm hidden group-hover:block">
+                        My Profile
+                    </div>
+                </div>
+    
+                <!-- Icons -->
+                <div class="space-y-8">
+                    <div class="group relative">
+                        <a href="/friends"><i class="fas fa-user-plus text-xl text-gray-500 cursor-pointer hover:text-blue-500"></i></a>
+                        <div class="absolute left-14 top-0 bg-white p-2 rounded shadow-md text-sm hidden group-hover:block">
+                            Add Friends
+                        </div>
+                    </div>
+    
+                    <div class="group relative">
+                        <a href="{{route('frinds_list')}}">
+                            <i class="fas fa-comments text-xl text-gray-500 cursor-pointer hover:text-blue-500"></i>
+                        </a>
+                        <div class="absolute left-14 top-0 bg-white p-2 rounded shadow-md text-sm hidden group-hover:block">
+                            Messages
+                        </div>
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 rounded-full">2</span>
+                    </div>
+    
+                    <div class="group relative">
+                        <a href="{{ route('friend_requests') }}"><i class="fas fa-users text-xl text-gray-500 cursor-pointer hover:text-blue-500"></i></a>
+                        <div class="absolute left-14 top-0 bg-white p-2 rounded shadow-md text-sm hidden group-hover:block">
+                            Friends
+                        </div>
+                        <span class="absolute -top-2 -right-2 bg-blue-500 text-white text-xs px-1.5 rounded-full">3</span>
+                    </div>
+                </div>
+            </div>
         <div class="container mx-auto px-4 py-8">
             <!-- Profile Card -->
             <div class="bg-white rounded-lg shadow-lg max-w-2xl mx-auto">
@@ -53,4 +92,47 @@
                 </div>
             </div>
         </div>
+        <div class="space-y-5">
+            @if($user->posts->isEmpty())
+    <p>No posts yet.</p>
+@else
+@foreach ($user->posts as $post)
+            <!-- Post Example -->
+            <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-200 hover:border-gray-300 transition-colors">
+                <div class="flex items-start gap-3">
+                    <img src="{{asset('storage/'.$post->user->img)}}" 
+                         alt="User Name" 
+                         class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
+                    <div class="flex-1">
+                        <div class="flex items-baseline gap-2 mb-1">
+                           <a href="{{ route('profile-view', $post->user->id) }}" <h4 class="font-semibold text-gray-800">{{$post->user->first_name}}</h4></a>
+                            <span class="text-sm text-gray-500">· 2h ago</span>
+                        </div>
+                        <p class="text-gray-800 leading-relaxed mb-4">
+                            {{$post->content}}
+                        </p>
+                        <img src="{{asset('storage/'.$post->img)}}" 
+                             alt="Post image" 
+                             class="w-full rounded-lg object-cover shadow-sm mb-4">
+                        
+                        <!-- Interaction Buttons -->
+                        <div class="flex items-center gap-4 pt-3 border-t border-gray-100">
+                            <button class="flex items-center gap-1.5 text-gray-500 hover:text-blue-500">
+                                <i class="far fa-comment text-lg"></i>
+                                <span class="text-sm">24 comments</span>
+                            </button>
+                            <button class="flex items-center gap-1.5 text-gray-500 hover:text-red-500">
+                                <i class="far fa-heart text-lg"></i>
+                                <span class="text-sm">148 likes</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+            @endif
+        </div>
+    </div>
+</div>
+</div>
     </x-layout>

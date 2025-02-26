@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\FriendController;
+use App\Http\Controllers\PostController;
 use App\Models\Friend;
 use App\Models\User;
 
@@ -72,12 +73,21 @@ Route::middleware('auth')->group(function () {
 
 // load the view for the friend request pages 
 Route::get('/friend_requests', [FriendController::class, 'friendRequests'])->name('friend_requests');
+// load the view for the friends list 
 Route::get('/friends_list', [FriendController::class, 'friendsList'])->name('frinds_list');
+// load the view for the profile of another user 
 Route::get('/profile/{userId}', [FriendController::class, 'profile'])->name('profile-view');
 
 
 Route::delete('/friend_requests/{id}/remove', [FriendController::class, 'declineRequest'])
     ->name('decline-request');
+//  the route for submiting the form 
+
+Route::post('/post', [PostController::class, 'store'])->name('post.add');
+
+// get the posts from database 
+
+Route::get('/dashboard', [PostController::class, 'index'])->name('dashboard');
 
 
 

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Models\User;
+
 use App\Models\Friend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\User;
+// use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 
 class FriendController extends Controller
@@ -102,7 +105,7 @@ class FriendController extends Controller
 
     public function profile($userId)
     {
-        $user = User::findOrFail($userId);
+        $user = User::with('posts')->findOrFail($userId);
         return view('profile_view', compact('user'));
     }
 }
