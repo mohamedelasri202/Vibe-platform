@@ -90,7 +90,7 @@ Route::post('/post', [PostController::class, 'store'])->name('post.add');
 
 Route::get('/dashboard', [PostController::class, 'index'])->name('dashboard');
 // load the edite form 
-// Route::get('/edite', [PostController::class, 'update'])->name('edite post');
+Route::get('/edite', [PostController::class, 'update'])->name('edite-post');
 
 
 

@@ -48,6 +48,7 @@
                 <div class="max-w-2xl mx-auto space-y-6">
                     <!-- Post Creation Card -->
                     <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-200">
+                        
                         <div class="flex items-start gap-3">
                             <img src="{{ asset('storage/'. Auth::user()->img) }}" 
                                  alt="{{ Auth::user()->first_name }}" 
@@ -57,9 +58,7 @@
                                     @csrf 
                                     <textarea name="content" 
                                               placeholder="What's on your mind?" 
-                                              class="w-full p-3 text-gray-800 rounded-lg border-none 
-                                                     focus:ring-2 focus:ring-blue-200 resize-none
-                                                     placeholder-gray-500 bg-gray-50 min-h-[100px]"></textarea>
+                            class="w-full p-3 text-gray-800 rounded-lg border-none focus:ring-2 focus:ring-blue-200 resize-none placeholder-gray-500 bg-gray-50 min-h-[100px]"></textarea>
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center gap-4 text-gray-500">
                                             <label class="flex items-center gap-1.5 cursor-pointer 
@@ -119,6 +118,7 @@
                                         </button>
                                     </div>
                                 </div>
+                             
                             </div>
                         </div>
                         @endforeach
