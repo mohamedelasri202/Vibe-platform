@@ -142,7 +142,6 @@ class UserController extends Controller
         $user->update($formFields);
 
 
-
-        return redirect('/profilo')->with('message', 'User created and logged in');
+        return redirect()->route('profile-view', auth()->id())->with('message', 'User created and logged in');
     }
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\FriendController;
 use App\Http\Controllers\PostController;
 use App\Models\Friend;
 use App\Models\User;
+use PHPUnit\Framework\Attributes\PostCondition;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +89,8 @@ Route::post('/post', [PostController::class, 'store'])->name('post.add');
 // get the posts from database 
 
 Route::get('/dashboard', [PostController::class, 'index'])->name('dashboard');
+// load the edite form 
+// Route::get('/edite', [PostController::class, 'update'])->name('edite post');
 
 
 

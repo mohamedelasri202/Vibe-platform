@@ -7,7 +7,7 @@
             <div class="w-20 bg-white border-r flex flex-col items-center py-6 space-y-8">
                 <!-- Profile -->
                 <div class="group relative">
-                   <a href="/profilo"> <img src="{{ asset('storage/'. Auth::user()->img) }}" alt="{{ Auth::user()->first_name }}" class="w-10 h-10 rounded-full"></a>
+                   <a href="{{ route('profile-view', auth()->id()) }}"> <img src="{{ asset('storage/'. Auth::user()->img) }}" alt="{{ Auth::user()->first_name }}" class="w-10 h-10 rounded-full"></a>
                     <div class="absolute left-14 top-0 bg-white p-2 rounded shadow-md text-sm hidden group-hover:block">
                         My Profile
                     </div>
@@ -102,10 +102,11 @@
                                     <p class="text-gray-800 leading-relaxed mb-4">
                                         {{$post->content}}
                                     </p>
-                                    <img src="{{asset('storage/'.$post->img)}}" 
-                                         alt="Post image" 
-                                         class="w-full rounded-lg object-cover shadow-sm mb-4">
-                                    
+                                    @if($post->img)
+                                            <img src="{{asset('storage/'.$post->img)}}" 
+                                                 alt="Post image" 
+                                                 class="w-full h-80 rounded-lg object-cover shadow-sm mb-4">
+                                            @endif
                                     <!-- Interaction Buttons -->
                                     <div class="flex items-center gap-4 pt-3 border-t border-gray-100">
                                         <button class="flex items-center gap-1.5 text-gray-500 hover:text-blue-500">

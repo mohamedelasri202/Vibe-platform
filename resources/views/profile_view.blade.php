@@ -48,6 +48,7 @@
                         <div class="relative w-full h-48 bg-gray-300 rounded-lg overflow-hidden">
                             <img src="/api/placeholder/800/200" alt="Cover Photo" class="w-full h-full object-cover">
                         </div>
+                        
     
                         <!-- Profile Picture & Info -->
                         <div class="relative text-center -mt-16">
@@ -55,12 +56,30 @@
                             <h1 class="mt-3 text-2xl font-bold text-gray-900">{{ $user->first_name }} {{ $user->last_name }}</h1>
                             <p class="text-gray-500">{{ $user->email }}</p>
                         </div>
+
+
+
     
                         <!-- Bio Section -->
+
+                  
+                        @if(auth::user()->id == $user->id)
+                        
+                            <div class="flex justify-between items-start">
+                                <form action="/edite" method="GET">
+                                    @csrf
+                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">
+                                        Edit Profile
+                                    </button>
+                                </form>
+                            </div>
+                        
                         <div class="border-t border-gray-200 pt-4 mt-4">
                             <h2 class="text-xl font-semibold mb-2">Bio</h2>
                             <p class="text-gray-600">{{ $user->bio }}</p>
                         </div>
+                        @endif
+                    
                     </div>
     
                     <!-- User Posts -->

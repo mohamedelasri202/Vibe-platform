@@ -19,7 +19,7 @@
                     <div class="relative flex justify-center -mt-16">
                         <label for="img" class="cursor-pointer">
                             <img id="preview" src="{{ asset('storage/' . Auth::user()->img) }}" 
-                                 alt="{{ Auth::user()-> }}" 
+                                 alt="{{ Auth::user()->first_name }}" 
                                  class="w-40 h-40 rounded-full border-4 border-white object-cover">
                             <input type="file" name="img" id="img" class="hidden" onchange="previewImage(this)">
                         </label>
