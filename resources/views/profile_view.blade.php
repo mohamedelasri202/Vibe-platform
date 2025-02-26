@@ -66,12 +66,12 @@
                         @if(auth::user()->id == $user->id)
                         
                             <div class="flex justify-between items-start">
-                                <form action="/edite" method="GET">
-                                    @csrf
-                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">
+                              
+                                    <a href="/edite" class="btn btn-primary"><button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">
                                         Edit Profile
-                                    </button>
-                                </form>
+                                    </button></a>
+                            
+                                
                             </div>
                         
                         <div class="border-t border-gray-200 pt-4 mt-4">
@@ -142,10 +142,15 @@
                                                 </button>
                                             </div>
                                         </div>
+                                        @if(auth::user()->id == $user->id)
                                         <div>
                                             <!-- Edit Icon -->
                                             <i class="far fa-edit h-12 w-12 cursor-pointer" onclick="editPost({{ $post->id }})"></i>
                                         </div>
+                                       <div>
+                                        <i class="fa-solid fa-trash"></i>
+                                    </div>
+                                        @endif
                                     </div>
                                 </div>
                             @endforeach

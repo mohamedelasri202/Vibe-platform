@@ -57,4 +57,16 @@ class PostController extends Controller
 
         return view('dashboard', compact('posts'));
     }
+    public function update(Request $request, Post $post)
+    {
+        $formFields = $request->validate([
+            'content' => ['nullable', 'string'],
+            'img' => ['nullable'],
+        ]);
+        if ($request->hasFile('img')) {
+            $formFields['img'] = $request->file('img')->store('posts', 'public');
+        }
+        $post->update($formFields);
+        return redirect()->route('dashboard')->with('message', 'Post updated successfully');
+    }
 }

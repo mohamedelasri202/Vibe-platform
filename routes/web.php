@@ -54,7 +54,7 @@ Route::post('/User/authenticate', [UserController::class, 'authenticate']);
 
 //  edite submit to update the user detaills 
 // get the view for the edite form 
-Route::get('/edite', [UserController::class, 'edite']);
+Route::get('/edite', [UserController::class, 'edite'])->name('edite-profile');
 
 Route::get('/profilo', [UserController::class, 'profilo'])->name('profilo.profilo');
 Route::Put('/edite/{user}', [UserController::class, 'update']);
@@ -90,7 +90,7 @@ Route::post('/post', [PostController::class, 'store'])->name('post.add');
 
 Route::get('/dashboard', [PostController::class, 'index'])->name('dashboard');
 // load the edite form 
-Route::get('/edite', [PostController::class, 'update'])->name('edite-post');
+Route::put('/editepost/{post}', [PostController::class, 'update'])->name('edite-post');
 
 
 
