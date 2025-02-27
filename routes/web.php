@@ -106,6 +106,9 @@ Route::post('/like/{post}', [likeController::class, 'addliek'])->name('likeadd')
 
 Route::post('/comments/{post}', [CommentController::class, 'store'])->name('add-comment');
 
+// route for the show comment 
+Route::get('/comments/{post}', [CommentController::class, 'index'])->name('show-comment');
+
 
 
 // Route::get('/profile/{userId}', [FriendController::class, 'profile'])->name('profile.view');

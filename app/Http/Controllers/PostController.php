@@ -54,7 +54,7 @@ class PostController extends Controller
         $friendIds->push($userId);
 
         // Fetch posts only from the user and their friends
-        $posts = Post::whereIn('user_id', $friendIds)->latest()->get();
+        $posts = Post::whereIn('user_id', $friendIds)->with('user')->latest()->get();
 
         return view('dashboard', compact('posts'));
     }
