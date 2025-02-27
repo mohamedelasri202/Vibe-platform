@@ -108,10 +108,11 @@
                                             @endif
                                     <!-- Interaction Buttons -->
                                     <div class="flex items-center gap-4 pt-3 border-t border-gray-100">
-                                        <button class="flex items-center gap-1.5 text-gray-500 hover:text-blue-500">
-                                            <i class="far fa-comment text-lg"></i>
-                                            <span class="text-sm">24 comments</span>
-                                        </button>
+                                        <form action="{{ route('add-comment', $post->id) }}" method="POST" class="mt-3">
+                                            @csrf
+                                            <textarea name="content" rows="2" class="w-full p-2 border rounded" placeholder="Write a comment..." required></textarea>
+                                            <button type="submit" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">Comment</button>
+                                        </form>
                                         <form action="{{ route('likeadd', $post->id) }}" method="POST">
                                             @csrf
                                             <button type="submit" class="flex items-center gap-1.5 text-gray-500 hover:text-red-500">

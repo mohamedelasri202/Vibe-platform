@@ -8,6 +8,7 @@ use App\Http\Controllers\likeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FriendController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use PHPUnit\Framework\Attributes\PostCondition;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -100,6 +101,10 @@ Route::delete('/deletepost/{post}', [PostController::class, 'destroy'])->name('d
 // route for the likes 
 
 Route::post('/like/{post}', [likeController::class, 'addliek'])->name('likeadd');
+
+// route for the comments 
+
+Route::post('/comments/{post}', [CommentController::class, 'store'])->name('add-comment');
 
 
 
