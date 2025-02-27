@@ -1,15 +1,16 @@
 <?php
 
+use App\Models\User;
+use App\Models\Friend;
 use App\Models\listing;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\FriendController;
+use App\Http\Controllers\likeController;
 use App\Http\Controllers\PostController;
-use App\Models\Friend;
-use App\Models\User;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\FriendController;
+use App\Http\Controllers\ProfileController;
 use PHPUnit\Framework\Attributes\PostCondition;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +96,10 @@ Route::put('/editepost/{post}', [PostController::class, 'update'])->name('edite-
 // the route for the delete a certain post 
 
 Route::delete('/deletepost/{post}', [PostController::class, 'destroy'])->name('delete-post');
+
+// route for the likes 
+
+Route::post('/like/{post}', [likeController::class, 'addliek'])->name('likeadd');
 
 
 

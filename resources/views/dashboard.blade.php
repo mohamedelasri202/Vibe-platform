@@ -112,10 +112,17 @@
                                             <i class="far fa-comment text-lg"></i>
                                             <span class="text-sm">24 comments</span>
                                         </button>
-                                        <button class="flex items-center gap-1.5 text-gray-500 hover:text-red-500">
-                                            <i class="far fa-heart text-lg"></i>
-                                            <span class="text-sm">148 likes</span>
-                                        </button>
+                                        <form action="{{ route('likeadd', $post->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="flex items-center gap-1.5 text-gray-500 hover:text-red-500">
+                                                @if ($post->likes->where('user_id', auth()->id())->count())
+                                                    <i class="fas fa-heart text-red-500"></i> 
+                                                @else
+                                                    <i class="far fa-heart"></i> 
+                                                @endif
+                                                <span>{{ $post->likes->count() }} likes</span>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                            

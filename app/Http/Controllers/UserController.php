@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\like;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Termwind\Components\Raw;
@@ -143,5 +144,10 @@ class UserController extends Controller
 
 
         return redirect()->route('profile-view', auth()->id())->with('message', 'User created and logged in');
+    }
+
+    public function likes()
+    {
+        return $this->hasmany(like::class);
     }
 }
