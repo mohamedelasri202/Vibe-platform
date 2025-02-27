@@ -92,6 +92,10 @@ Route::get('/dashboard', [PostController::class, 'index'])->name('dashboard');
 // load the edite form 
 Route::put('/editepost/{post}', [PostController::class, 'update'])->name('edite-post');
 
+// the route for the delete a certain post 
+
+Route::delete('/deletepost/{post}', [PostController::class, 'destroy'])->name('delete-post');
+
 
 
 // Route::get('/profile/{userId}', [FriendController::class, 'profile'])->name('profile.view');

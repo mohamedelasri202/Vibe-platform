@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Friend;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -68,5 +69,24 @@ class PostController extends Controller
         }
         $post->update($formFields);
         return redirect()->route('dashboard')->with('message', 'Post updated successfully');
+    }
+
+    // the methode for delete a post
+    public function destroy(Post $post)
+    {
+        // Ensure only the post owner can delete it
+        // if (auth()->id() !== $post->user_id) {
+        //     return back()->with('error', 'Unauthorized action');
+        // }
+
+        // Delete image if it exists
+        if ($post->img) {
+            Storage::delete('public/' . $post->img);
+        }
+
+        // Delete the post
+        $post->delete();
+
+        return redirect()->route('dashboard')->with('message', 'Post deleted successfully');
     }
 }

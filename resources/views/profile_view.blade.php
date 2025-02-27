@@ -148,7 +148,14 @@
                                             <i class="far fa-edit h-12 w-12 cursor-pointer" onclick="editPost({{ $post->id }})"></i>
                                         </div>
                                        <div>
-                                        <i class="fa-solid fa-trash"></i>
+                                            <!-- Delete Icon -->
+                                            <form action="{{ route('delete-post', $post->id) }}" method="POST" class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-red-500 hover:text-red-700">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </form>
                                     </div>
                                         @endif
                                     </div>
