@@ -97,7 +97,7 @@
                                         <div class="flex-1">
                                             <div class="flex items-baseline gap-2 mb-1">
                                                 <a href="{{ route('profileview', $post->user->id) }}" class="font-semibold text-gray-800">{{ $post->user->first_name }}</a>
-                                                <span class="text-sm text-gray-500">· 2h ago</span>
+                                                <span class="text-sm text-gray-500">· {{ $post->created_at->diffForHumans() }}</span>
                                             </div>
                     
                                             <!-- Editable Post Content -->
