@@ -1,0 +1,16 @@
+lien de planification  jira ::
+
+https://mohamedelasri.atlassian.net/jira/core/projects/VPV/board?atlOrigin=eyJpIjoiZTQxNzk3NWJkOTYxNDlmZWJhMDUwNTY3ZTE3OThlODciLCJwIjoiaiJ9
+
+lien de diagrame de class vibe.v2::
+
+https://lucid.app/lucidchart/ef11f681-3521-46ff-8d9e-1029641e9d8a/edit?viewport_loc=-649%2C-434%2C2000%2C1017%2C0_0&invitationId=inv_e32e7ac1-77e1-4040-8229-88d85cf3a77b
+
+
+lien de digram de case d'utilisation  vibe.v2::
+
+https://lucid.app/lucidchart/6da513ec-a06e-4fa2-bc32-78abfc07d635/edit?viewport_loc=-1015%2C-367%2C2273%2C990%2C0_0&invitationId=inv_83f8c221-a041-4108-9b84-6e163dff0bfd
+
+
+
+
