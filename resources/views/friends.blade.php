@@ -82,11 +82,7 @@
                                     Add Friend
                                 </button>
                             </form>
-                            <!-- Remove button -->
-                            <button class="w-full bg-gray-200 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-300 transition">
-                                Remove
-                            </button>
-                            <a href="#" class="block text-center text-blue-500 hover:underline text-sm">View Profile</a>
+                           
                         </div>
                     </div>
                 </div>

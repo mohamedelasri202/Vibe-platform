@@ -96,7 +96,7 @@
                                              class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
                                         <div class="flex-1">
                                             <div class="flex items-baseline gap-2 mb-1">
-                                                <a href="{{ route('profile-view', $post->user->id) }}" class="font-semibold text-gray-800">{{ $post->user->first_name }}</a>
+                                                <a href="{{ route('profileview', $post->user->id) }}" class="font-semibold text-gray-800">{{ $post->user->first_name }}</a>
                                                 <span class="text-sm text-gray-500">· 2h ago</span>
                                             </div>
                     
@@ -122,7 +122,7 @@
                                                 @if($post->img)
                                                     <img src="{{ asset('storage/'.$post->img) }}" alt="Post Image" class="w-32 h-32 object-cover my-3" id="img-preview-{{ $post->id }}">
                                                 @endif
-                                                <input type="file" name="img" class="hidden" accept="image/*" id="img-upload-{{ $post->id }}">
+                                                <input type="file" name="img" class="" accept="image/*" id="img-upload-{{ $post->id }}">
                     
                                                 <div class="flex items-center justify-between mt-4">
                                                     <button type="submit" class="px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium shadow-sm hover:shadow-md">Save</button>
@@ -131,16 +131,50 @@
                                             </form>
                     
                                             <!-- Interaction Buttons -->
-                                            <div class="flex items-center gap-4 pt-3 border-t border-gray-100">
-                                                <button class="flex items-center gap-1.5 text-gray-500 hover:text-blue-500">
-                                                    <i class="far fa-comment text-lg"></i>
-                                                    <span class="text-sm">24 comments</span>
-                                                </button>
-                                                <button class="flex items-center gap-1.5 text-gray-500 hover:text-red-500">
-                                                    <i class="far fa-heart text-lg"></i>
-                                                    <span class="text-sm">148 likes</span>
-                                                </button>
+                                            <div class="pt-4 mt-4 border-t border-gray-100 space-y-4">
+                                                <!-- Like Button -->
+                                                <form action="{{ route('likeadd', $post->id) }}" method="POST" class="inline-block">
+                                                    @csrf
+                                                    <button type="submit" 
+                                                            class="flex items-center gap-1.5 text-gray-600 hover:text-red-500 transition-colors duration-200">
+                                                        <span class="relative">
+                                                            @if ($post->likes->where('user_id', auth()->id())->count())
+                                                                <i class="fas fa-heart text-red-500"></i>
+                                                                <span class="absolute opacity-0 group-hover:opacity-100 transition-opacity -right-5 text-[10px] text-red-500">
+                                                                    Unlike
+                                                                </span>
+                                                            @else
+                                                                <i class="far fa-heart"></i>
+                                                                <span class="absolute opacity-0 group-hover:opacity-100 transition-opacity -right-5 text-[10px] text-red-500">
+                                                                    Like
+                                                                </span>
+                                                            @endif
+                                                        </span>
+                                                        <span class="text-sm font-medium {{ $post->likes->count() ? 'text-red-500' : 'text-gray-500' }}">
+                                                            {{ $post->likes->count() }}
+                                                        </span>
+                                                    </button>
+                                                </form>
+    
+                                                <!-- Comment Form -->
+                                                <form action="{{ route('add-comment', $post->id) }}" method="POST" class="flex gap-3 items-start">
+                                                    @csrf
+                                                    <img src="{{ asset('storage/'. Auth::user()->img) }}" 
+                                                         class="w-8 h-8 rounded-full object-cover shadow-sm">
+                                                    <div class="flex-1">
+                                                        <textarea name="content" 
+                                                                  rows="1"
+                                                                  placeholder="Write a comment..."
+                                                                  class="w-full px-3 py-2 text-sm border border-gray-200 rounded-full focus:ring-2 focus:ring-blue-200 focus:border-transparent placeholder-gray-400 resize-none transition-all"></textarea>
+                                                    </div>
+                                                    <button type="submit" 
+                                                            class="text-sm px-4 py-1.5 bg-blue-500 text-white rounded-full 
+                                                                  hover:bg-blue-600 transition-colors shadow-sm">
+                                                        Post
+                                                    </button>
+                                                </form>
                                             </div>
+                                      
                                         </div>
                                         @if(auth::user()->id == $user->id)
                                         <div>

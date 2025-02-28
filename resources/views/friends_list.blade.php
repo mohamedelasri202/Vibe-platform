@@ -59,7 +59,7 @@
                             
                             <div class="mt-4 space-y-2">
                                 <!-- View Profile Button -->
-                                <a href="{{ route('profile-view', $friend->id) }}" 
+                                <a href="{{ route('profileview', $friend->id) }}" 
                                    class="block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition">
                                     View Profile
                                 </a>
@@ -68,10 +68,7 @@
                                 <form action="" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" 
-                                            class="w-full bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition">
-                                        Unfriend
-                                    </button>
+                                    
                                 </form>
                             </div>
                         </div>

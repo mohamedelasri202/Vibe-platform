@@ -6,7 +6,7 @@
             <div class="w-20 bg-white border-r flex flex-col items-center py-6 space-y-8">
                 <!-- Profile -->
                 <div class="group relative">
-                   <a href="{{ route('profile-view', auth()->id()) }}"> <img src="{{ asset('storage/'. Auth::user()->img) }}" alt="{{ Auth::user()->first_name }}" class="w-10 h-10 rounded-full"></a>
+                   <a href="{{ route('profileview', auth()->id()) }}"> <img src="{{ asset('storage/'. Auth::user()->img) }}" alt="{{ Auth::user()->first_name }}" class="w-10 h-10 rounded-full"></a>
                     <div class="absolute left-14 top-0 bg-white p-2 rounded shadow-md text-sm hidden group-hover:block">
                         My Profile
                     </div>
@@ -91,7 +91,7 @@
                                          class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
                                     <div class="flex-1">
                                         <div class="flex items-baseline gap-2 mb-1">
-                                           <a href="{{ route('profile-view', $post->user->id) }}" class="font-semibold text-gray-800 hover:underline">{{$post->user->first_name}}</a>
+                                           <a href="{{ route('profileview', $post->user->id) }}" class="font-semibold text-gray-800 hover:underline">{{$post->user->first_name}}</a>
                                             <span class="text-sm text-gray-500">· {{ $post->created_at->diffForHumans() }}</span>
                                         </div>
                                         <p class="text-gray-800 leading-relaxed mb-4">
@@ -107,13 +107,13 @@
                                         <div class="mt-4 space-y-3">
                                             @foreach ($post->comments as $comment)
                                                 <div class="flex items-start gap-3 group">
-                                                    <a href="{{ route('profile-view', $comment->user->id) }}" class="shrink-0">
+                                                    <a href="{{ route('profileview', $comment->user->id) }}" class="shrink-0">
                                                         <img src="{{ asset('storage/'.$comment->user->img) }}" 
                                                              class="w-8 h-8 rounded-full object-cover shadow-sm mt-1">
                                                     </a>
                                                     <div class="flex-1">
                                                         <div class="bg-gray-50 rounded-lg p-3">
-                                                            <a href="{{ route('profile-view', $comment->user->id) }}" 
+                                                            <a href="{{ route('profileview', $comment->user->id) }}" 
                                                                class="text-sm font-semibold text-blue-600 hover:underline">
                                                                 {{ $comment->user->first_name }} {{ $comment->user->last_name }}
                                                             </a>

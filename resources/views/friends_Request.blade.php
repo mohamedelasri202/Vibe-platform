@@ -77,7 +77,7 @@
                             <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Decline</button>
                         </form>
                         
-                        <a href="{{ route('profile-view', $request->id) }}" 
+                        <a href="{{ route('profileview', $request->id) }}" 
                             class="block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition">
                              View Profile
                          </a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\like;
 use App\Models\User;
+use App\Models\Friend;
 use Illuminate\Http\Request;
 use Termwind\Components\Raw;
 use Illuminate\Hashing\BcryptHasher;
@@ -81,20 +82,37 @@ class UserController extends Controller
     public function friends(Request $request)
     {
         $search = $request->input('search');
+        $userId = auth()->id();
+
+        // Get the list of accepted friends
+        $friends = Friend::where('status', 'accepted')
+            ->where(function ($query) use ($userId) {
+                $query->where('sender_id', $userId)
+                    ->orWhere('receiver_id', $userId);
+            })
+            ->get();
+
+        // Extract friend IDs
+        $friendIds = $friends->map(function ($friend) use ($userId) {
+            return $friend->sender_id == $userId ? $friend->receiver_id : $friend->sender_id;
+        });
+
+        // Include yourself in the exclusion list
+        $friendIds->push($userId);
+
+        // Filter users who are NOT friends and apply search filter if needed
+        $usersQuery = User::whereNotIn('id', $friendIds);
 
         if ($search) {
-            $users = User::where('id', '!=', auth()->id())
-                ->where(function ($query) use ($search) {
-                    $query->where('first_name', 'like', "%{$search}%")
-                        ->orWhere('last_name', 'like', "%{$search}%")
-                        ->orWhere('email', 'like', "%{$search}%");
-                })
-                ->get();
-        } else {
-            $users = User::where('id', '!=', auth()->id())->get();
+            $usersQuery->where(function ($query) use ($search) {
+                $query->where('first_name', 'like', "%{$search}%")
+                    ->orWhere('last_name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%");
+            });
         }
 
-        // Pass the search query along with users data to the view
+        $users = $usersQuery->get();
+
         return view('friends', compact('users', 'search'));
     }
 
@@ -143,7 +161,7 @@ class UserController extends Controller
         $user->update($formFields);
 
 
-        return redirect()->route('profile-view', auth()->id())->with('message', 'User created and logged in');
+        return redirect()->route('profileview', auth()->id())->with('message', 'User created and logged in');
     }
 
     public function likes()

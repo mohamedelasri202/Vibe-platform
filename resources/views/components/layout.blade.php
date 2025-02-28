@@ -19,9 +19,9 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="/home" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/dashboard" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
                         <a href="/home" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
-                        <a href="#" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+
                     </div>
                 </div>
                 @auth

@@ -71,7 +71,7 @@ Route::get('/friends', [UserController::class, 'friends']);
 Route::middleware('auth')->group(function () {
     Route::post('/friends/request/{receiverId}', [FriendController::class, 'sendRequest'])->name('friends.request');
     Route::post('/friends/accept/{requestId}', [FriendController::class, 'acceptRequest'])->name('friends.accept');
-    Route::post('/friends/decline/{requestId}', [FriendController::class, 'declineRequest'])->name('friends.decline');
+    Route::post('/friends/decline/{requestId}', [FriendController::class, 'declineRequest'])->name('decline-request');
 });
 
 // load the view for the friend request pages 
@@ -79,7 +79,7 @@ Route::get('/friend_requests', [FriendController::class, 'friendRequests'])->nam
 // load the view for the friends list 
 Route::get('/friends_list', [FriendController::class, 'friendsList'])->name('frinds_list');
 // load the view for the profile of another user 
-Route::get('/profile/{userId}', [FriendController::class, 'profile'])->name('profile-view');
+Route::get('/profile/{userId}', [FriendController::class, 'profile'])->name('profileview');
 
 
 Route::delete('/friend_requests/{id}/remove', [FriendController::class, 'declineRequest'])
